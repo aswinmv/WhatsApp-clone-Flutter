@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:whatsapp/provider/fireservice.dart';
-
 import 'chatpage.dart';
 
 class MainPage extends StatefulWidget {
@@ -22,7 +20,7 @@ class _MainPageState extends State<MainPage> {
       length: 10,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.amber,
+            backgroundColor: const Color(0xff017B6B),
             actions: [
               IconButton(
                 icon: const Icon(Icons.login_outlined),
@@ -84,7 +82,7 @@ class _MainPageState extends State<MainPage> {
             child: Text(
               data["email"],
             )),
-        subtitle: Text("Last Message"),
+        subtitle: const Text("Last Message"),
         trailing: const Icon(Icons.notifications_none_rounded),
       );
     } else {
