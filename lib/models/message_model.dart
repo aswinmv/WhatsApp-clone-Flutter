@@ -6,14 +6,15 @@ class MessageModel {
   final String receiverId;
   final String message;
   final Timestamp timeStamp;
+  dynamic imageUrl;
 
-  MessageModel({
-    required this.senderId,
-    required this.senderEmail,
-    required this.receiverId,
-    required this.message,
-    required this.timeStamp,
-  });
+  MessageModel(
+      {required this.senderId,
+      required this.senderEmail,
+      required this.receiverId,
+      required this.message,
+      required this.timeStamp,
+      required this.imageUrl});
 
   Map<String, dynamic> toMap() {
     return {
@@ -21,7 +22,8 @@ class MessageModel {
       "senderEmail": senderEmail,
       "reveiverId": receiverId,
       "message": message,
-      "timeStamp": timeStamp
+      "timeStamp": timeStamp,
+      "imageUrl": imageUrl
     };
   }
 }
