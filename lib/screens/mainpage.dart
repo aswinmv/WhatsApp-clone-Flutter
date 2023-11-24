@@ -26,9 +26,12 @@ class _MainPageState extends State<MainPage> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
             backgroundColor: const Color(0xff017B6B),
-            child: const Icon(
-              Icons.message_rounded,
-              color: Colors.white,
+            child: Transform.rotate(
+              angle: 135.1,
+              child: const Icon(
+                Icons.message_rounded,
+                color: Colors.white,
+              ),
             ),
           ),
           appBar: AppBar(

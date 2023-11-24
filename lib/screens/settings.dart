@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp/screens/mainpage.dart';
 
@@ -12,7 +13,6 @@ class _SettingsState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xff017B6B),
@@ -46,6 +46,37 @@ class _SettingsState extends State<SettingsPage> {
           )
         ],
       ),
+      body: Column(children: [
+        Row(
+          children: [
+            SizedBox(
+              height: 70,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Container(
+                        height: 55,
+                        width: 55,
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.circular(55)),
+                      ),
+                      title: const Text("Name"),
+                      subtitle: const Text("status"),
+                      trailing: const Icon(
+                        Icons.qr_code_2,
+                        size: 30,
+                        color: Colors.green,
+                      ),
+                    );
+                  }),
+            )
+          ],
+        ),
+        const Divider(),
+      ]),
     );
   }
 }
