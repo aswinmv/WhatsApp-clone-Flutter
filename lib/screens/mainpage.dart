@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:whatsapp/provider/fireservice.dart';
+import 'package:whatsapp/screens/updates.dart';
 import 'chatpage.dart';
 
 class MainPage extends StatefulWidget {
@@ -19,9 +20,57 @@ class _MainPageState extends State<MainPage> {
     return DefaultTabController(
       length: 10,
       child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: const Color(0xff017B6B),
+            child: const Icon(
+              Icons.message_rounded,
+              color: Colors.white,
+            ),
+          ),
           appBar: AppBar(
+            toolbarHeight: 85,
+            title: const Text(
+              "WhatsApp",
+              style: TextStyle(color: Colors.white),
+            ),
+            automaticallyImplyLeading: false,
+            bottom: const TabBar(tabs: [
+              Tab(
+                  child: Icon(
+                Icons.groups_2,
+                color: Colors.grey,
+              )),
+              Tab(
+                  child: Text(
+                "Chats",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              )),
+              Tab(
+                  child: Text(
+                "Updates",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              )),
+              Tab(
+                  child: Text(
+                "Calls",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ))
+            ]),
             backgroundColor: const Color(0xff017B6B),
             actions: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.camera_alt_outlined,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  )),
               IconButton(
                 icon: const Icon(Icons.login_outlined),
                 onPressed: () {
@@ -31,7 +80,14 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
-          body: _userList()),
+          body: TabBarView(
+            children: [
+              const Icon(Icons.flight),
+              _userList(),
+              const UpdatePage(),
+              const Calls()
+            ],
+          )),
     );
   }
 
@@ -66,8 +122,8 @@ class _MainPageState extends State<MainPage> {
           height: 60,
           width: 60,
           decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(35)),
-            color: Colors.amber,
+            borderRadius: BorderRadius.all(Radius.circular(40)),
+            color: Colors.deepPurple,
           ),
         ),
         title: InkWell(
@@ -76,6 +132,7 @@ class _MainPageState extends State<MainPage> {
                 builder: (context) => ChatPage(
                   receiverUserId: data["uid"],
                   receiverUserEmail: data["email"],
+                  receverName: data["name"],
                 ),
               ));
             },
