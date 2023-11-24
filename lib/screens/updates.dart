@@ -88,7 +88,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
               ),
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.add))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.add))
           ],
         ),
       ]),
@@ -102,7 +102,11 @@ class Calls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.deepOrange,
+      body: Center(
+          child: Text(
+        "Calls",
+        style: TextStyle(fontSize: 55),
+      )),
     );
   }
 }

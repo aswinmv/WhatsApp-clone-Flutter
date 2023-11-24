@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:whatsapp/provider/fireservice.dart';
+import 'package:whatsapp/screens/settings.dart';
 import 'package:whatsapp/screens/updates.dart';
 import 'chatpage.dart';
 
@@ -18,8 +19,10 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final authServices = Provider.of<FireService>(context);
     return DefaultTabController(
+      initialIndex: 1,
       length: 10,
       child: Scaffold(
+          backgroundColor: Colors.white,
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
             backgroundColor: const Color(0xff017B6B),
@@ -71,18 +74,66 @@ class _MainPageState extends State<MainPage> {
                     Icons.search,
                     color: Colors.white,
                   )),
-              IconButton(
-                icon: const Icon(Icons.login_outlined),
-                onPressed: () {
-                  authServices.signOut();
-                },
+              // popup menu button ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+              PopupMenuButton(
+                iconColor: Colors.white,
+                iconSize: 28,
                 color: Colors.white,
-              )
+                onSelected: (value) {
+                  // your logic
+                },
+                itemBuilder: (BuildContext bc) {
+                  return [
+                    PopupMenuItem(
+                      // value: '/Settings',
+                      child: TextButton(
+                          onPressed: () {}, child: const Text("New group")),
+                    ),
+                    PopupMenuItem(
+                      // value: '/Logout',
+                      child: TextButton(
+                          onPressed: () {
+                            authServices.signOut();
+                          },
+                          child: const Text("Logout/boadcast")),
+                    ),
+                    PopupMenuItem(
+                      // value: '/Settings',
+                      child: TextButton(
+                          onPressed: () {},
+                          child: const Text("Linked devices")),
+                    ),
+                    PopupMenuItem(
+                      // value: '/Settings',
+                      child: TextButton(
+                          onPressed: () {},
+                          child: const Text("Starred messages")),
+                    ),
+                    PopupMenuItem(
+                      // value: '/Settings',
+                      child: TextButton(
+                          onPressed: () {}, child: const Text("Payments")),
+                    ),
+                    PopupMenuItem(
+                      // value: '/Settings',
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const SettingsPage()));
+                          },
+                          child: const Text("Settings")),
+                    ),
+                  ];
+                },
+              ),
             ],
           ),
           body: TabBarView(
             children: [
-              const Icon(Icons.flight),
+              const Icon(
+                Icons.whatshot_sharp,
+                size: 155,
+              ),
               _userList(),
               const UpdatePage(),
               const Calls()
