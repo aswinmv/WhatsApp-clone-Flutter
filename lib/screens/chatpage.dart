@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp/provider/chatprovider.dart';
@@ -25,6 +26,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  bool isTyping = false;
   ChatProvider chatProvider = ChatProvider();
   TextEditingController controller = TextEditingController();
   FirebaseAuth fireAuth = FirebaseAuth.instance;
@@ -135,9 +137,6 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   child: Stack(
                     children: [
-                      // IconButton(
-                      //     onPressed: () {},
-                      //     icon: const Icon(Icons.emoji_emotions_outlined)),
                       Expanded(
                           child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -150,6 +149,13 @@ class _ChatPageState extends State<ChatPage> {
                                   borderRadius: BorderRadius.circular(30)),
                               child: TextField(
                                 controller: controller,
+                                onChanged: (value) {
+                                  isTyping = value.isEmpty ? false : true;
+
+                                  if (kDebugMode) {
+                                    print(isTyping);
+                                  }
+                                },
                                 decoration: const InputDecoration(
                                     hintText: "Message",
                                     border: OutlineInputBorder(
@@ -204,10 +210,15 @@ class _ChatPageState extends State<ChatPage> {
                         decoration: BoxDecoration(
                             color: const Color(0xff017B6D),
                             borderRadius: BorderRadius.circular(25)),
-                        child: const Icon(
-                          Icons.send_rounded,
-                          color: Colors.white,
-                        ),
+                        child: isTyping == true
+                            ? const Icon(
+                                Icons.send,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.mic,
+                                color: Colors.white,
+                              ),
                       )),
                 )
               ],
@@ -302,9 +313,12 @@ class _ChatPageState extends State<ChatPage> {
                 borderRadius: BorderRadius.circular(5), color: chatColor),
             child: Column(children: [
               // Text(data["senderEmail"]),
-              Text(
-                data["message"],
-                style: const TextStyle(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  data["message"],
+                  style: const TextStyle(fontSize: 20),
+                ),
               )
             ]),
           ),
