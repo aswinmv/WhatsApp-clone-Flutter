@@ -18,6 +18,10 @@ The project leverages Flutter's expressive UI capabilities and Firebase's real-t
 
 ## Firebase
 
+
+  <img src="https://miro.medium.com/v2/resize:fit:600/format:webp/1*R4c8lHBHuH5qyqOtZb3h-w.png" alt="Firebase Logo">
+
+
 ## Installation
 
 1. **Clone the Repository:**
